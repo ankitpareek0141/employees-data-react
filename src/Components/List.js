@@ -26,7 +26,7 @@ export default function List() {
         } else {
             setUserInList(
                 allUsers.filter((user) => {
-                    return user.id !== e.target.id;
+                    return user.id != e.target.id;
                 })
             );
         }
@@ -37,7 +37,7 @@ export default function List() {
             <div className="container-fluid w-50 my-5">
                 <form onSubmit={handelSubmit} className="border p-4">
                     <div className="h4 pb-2 mb-4 mt-3 border-bottom border-primary fw-bolder">
-                        Add Employee
+                        Add New Employee
                     </div>
 
                     <div className="mb-3 row">
@@ -59,7 +59,7 @@ export default function List() {
 
                     <div className="mb-3 row">
                         <label
-                            forHtml="userAgeInput"
+                            forhtml="userAgeInput"
                             className="col-sm-2 col-form-label"
                         >
                             Age
@@ -126,25 +126,31 @@ export default function List() {
                         </tr>
                     </thead>
                     <tbody>
-                        {allUsers.map((user) => {
-                            return (
-                                <tr key={user.id}>
-                                    <td scope="col">{user.name}</td>
-                                    <td scope="col">{user.age}</td>
-                                    <td scope="col">{user.city}</td>
-                                    <td>
-                                        <span
-                                            className="badge bg-primary rounded-pill"
-                                            type="button"
-                                            id={user.id}
-                                            onClick={handelDelete}
-                                        >
-                                            Delete
-                                        </span>
-                                    </td>
-                                </tr>
-                            );
-                        })}
+                        {allUsers.length == 0 ? (
+                            <h3 className="text-center fw-lighter">
+                                List is empty, Please add some data!
+                            </h3>
+                        ) : (
+                            allUsers.map((user) => {
+                                return (
+                                    <tr key={user.id}>
+                                        <td scope="col">{user.name}</td>
+                                        <td scope="col">{user.age}</td>
+                                        <td scope="col">{user.city}</td>
+                                        <td>
+                                            <span
+                                                className="badge bg-danger rounded-pill"
+                                                type="button"
+                                                id={user.id}
+                                                onClick={handelDelete}
+                                            >
+                                                Delete
+                                            </span>
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                        )}
                     </tbody>
                 </table>
             </div>
